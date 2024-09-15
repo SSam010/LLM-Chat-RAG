@@ -1,0 +1,5 @@
+/.env
+/without_sink/
+**/*.log
+.idea/
+**/__pycache__

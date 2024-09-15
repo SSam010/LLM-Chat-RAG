@@ -1,0 +1,23 @@
+body {
+    background: linear-gradient(to right, #5e5e5d, #212529);
+    color: white;
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    font-size: 20px;
+    margin: 0 10vw;
+}
+
+span {
+    background: #0b2670;
+    color: white;
+}
+
+::selection {
+    background: #3c9183;
+    color: white;
+}

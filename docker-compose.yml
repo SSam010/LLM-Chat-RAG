@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+
+  first_resource_app:
+    container_name: chat_first_resource
+    networks:
+      - shared_network
+    restart: always
+    env_file:
+      - .env
+    build:
+      context: .
+    environment:
+      DATASET: ${FIRST_CHAT_DATASET}
+    ports:
+      - "${FIRST_CHAT_EXTERNAL_FA_PORT}:${FIRST_CHAT_FA_PORT}"
+    command: uvicorn app:app --reload --host ${FIRST_CHAT_FA_HOST} --port ${FIRST_CHAT_FA_PORT}
+    volumes:
+      - ./web:/usr/src/rag_chat
+
+
+  second_resource_app:
+    container_name: chat_second_resource
+    networks:
+      - shared_network
+    restart: always
+    env_file:
+      - .env
+    build:
+      context: .
+    environment:
+      DATASET: ${SECOND_CHAT_DATASET}
+    ports:
+      - "${SECOND_CHAT_EXTERNAL_FA_PORT}:${SECOND_CHAT_FA_PORT}"
+    command: uvicorn app:app --reload --host ${SECOND_CHAT_FA_HOST} --port ${SECOND_CHAT_FA_PORT}
+    volumes:
+      - ./web:/usr/src/rag_chat
+
+
+volumes:
+  web:
+
+networks:
+  shared_network:
+    external: true

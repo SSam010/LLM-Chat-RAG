@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat RAG tool - {{ dataset }}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/main_v2.css') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', path='image/favicon.png') }}">
+</head>
+<body id="my_body">
+<div id="loader">
+</div>
+<div id="chat">
+    <div id="main-container">
+        <aside id="aside-conteiner">
+            <div class="container">
+                <label id="modelLabel">{{ dataset }}</label>
+            </div>
+            <button class="btn btn-info" id="select-db" onclick="clearScreen()">Clear</button>
+        </aside>
+        <div id="chat-container-general">
+            <div id="banner">
+                {{ banner|join('<br>')|safe }}
+            </div>
+            <div id="chat-container">
+                <div id="chat-messages">
+                    <div id="presets">
+                        {% for preset in presets %}
+                        <button class="preset btn btn-outline-dark">{{ preset }}</button>
+                        {% endfor %}
+                    </div>
+                </div>
+                <img id="loading" src="static/image/massage_waiting.gif" style="display: none;">
+                <div id="user-input-container">
+                    <input type="text" id="user-input" placeholder="Write message">
+                    <button class="btn btn-info" id="send-button">Send</button>
+                </div>
+        </div>
+        </div>
+        <div id="info-container"></div>
+    </div>
+
+</div>
+
+<script>
+    var primarySource = "{{ primary_source }}";
+    var dataset = "{{ dataset }}";
+</script>
+<script src="{{ url_for('static', path='js/chat_message.js') }}"></script>
+<script src="{{ url_for('static', path='js/intro_animation_v2.js') }}"></script>
+</body>
+</html>

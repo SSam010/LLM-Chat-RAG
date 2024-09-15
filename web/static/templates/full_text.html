@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Article</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/full_article.css') }}">
+<body>
+{% for key, value in response.items() %}
+    <h1>{{ key }}</h1>
+    <p>{{ value|replace(fragment, '<span class="highlight">' + fragment + '</span>')|safe }}</p>
+{% endfor %}
+
+</body>
+</html>
